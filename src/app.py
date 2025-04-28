@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_extras.dataframe_explorer import dataframe_explorer
+import os
 
 # Configure page
 st.set_page_config(
@@ -37,6 +38,9 @@ SALES_FILE = 'data/sales.json'
 
 def init_files():
     """Initialize data files if they don't exist"""
+    # Create data directory first
+    os.makedirs(os.path.dirname(PRODUCTS_FILE), exist_ok=True)
+    
     for file in [PRODUCTS_FILE, SALES_FILE]:
         try:
             with open(file, 'x') as f:
